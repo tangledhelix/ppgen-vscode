@@ -1,0 +1,39 @@
+{
+    "name": "ppgen",
+    "displayName": "PPgen",
+    "description": "Post-processing generator for Distributed Proofreaders",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.56.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "homepage": "https://github.com/tangledhelix/ppgen-vscode",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tangledhelix/ppgen-vscode.git"
+    },
+    "bugs": {
+        "type": "git",
+        "url": "https://github.com/tangledhelix/ppgen-vscode/issues"
+    },
+    "contributes": {
+        "languages": [{
+            "id": "ppgen",
+            "aliases": ["PPgen", "ppgen"],
+            "mimetypes": ["text/ppgen"],
+            "extensions": ["-src.txt"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "ppgen",
+            "scopeName": "text.ppgen",
+            "path": "./syntaxes/ppgen.json",
+            "embeddedLanguages": {
+                "source.css": "css",
+                "text.html.basic": "html"
+            }
+        }]
+    }
+}

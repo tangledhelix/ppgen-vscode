@@ -1,0 +1,127 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "PPgen",
+  "scopeName": "text.ppgen",
+  "fileTypes": ["-src.txt"],
+  "patterns": [{ "include": "#expression" }],
+  "repository": {
+    "expression": {
+      "patterns": [
+        { "include": "#comment-line-slashes" },
+        { "include": "#comment-line-ig" },
+        { "include": "#comment-block-ig" },
+        { "include": "#embedded-css" },
+        { "include": "#embedded-html" },
+        { "include": "#command-generic" },
+        { "include": "#escaped-space-characters" },
+        { "include": "#tags" },
+        { "include": "#pipes" },
+        { "include": "#links" },
+        { "include": "#footnote-marker" },
+        { "include": "#table" },
+        { "include": "#macro" },
+        { "include": "#caption-format" }
+      ]
+    },
+    "command-generic": {
+      "match": "^\\.(ad|bn|c[aeiv]|d[cdiltv]|f[mns]|g[klu]|h[r1-6]|i[flntx]|ll|ma|n[afir]|ol|p[bimn]|rj|s[npr]|t[bi]|ul)-?",
+      "name": "entity.name.function"
+    },
+    "comment-line-slashes": {
+      "name": "comment.line.double-slash",
+      "match": "//.*"
+    },
+    "comment-line-ig": {
+      "match": "^\\.ig\\s+.+$",
+      "name": "comment.line.ignore-command"
+    },
+    "comment-block-ig": {
+      "begin": "^\\.ig\\s*$",
+      "end": "^\\.ig-\\s*$",
+      "name": "comment.block.ignore-command"
+    },
+    "tags": {
+      "match": "</?[^>]+>",
+      "name": "keyword.tag"
+    },
+    "pipes": {
+      "match": "\\|",
+      "name": "constant.character"
+    },
+    "links": {
+      "match": "#[^#:]+(:[^#]+)?#",
+      "name": "string.interpolated"
+    },
+    "embedded-css": {
+      "name": "meta.embedded.block.css",
+      "begin": "^\\.de\\s+",
+      "end": "$",
+      "beginCaptures": {
+        "0": { "name": "entity.name.function" }
+      },
+      "patterns": [{ "include": "source.css" }]
+    },
+    "embedded-html": {
+      "name": "meta.embedded.block.html",
+      "begin": "^\\.li\\s*$",
+      "end": "^\\.li-\\s*$",
+      "beginCaptures": {
+        "0": { "name": "entity.name.function" }
+      },
+      "endCaptures": {
+        "0": { "name": "entity.name.function" }
+      },
+      "patterns": [{ "include": "text.html.basic" }]
+    },
+    "escaped-space-characters": {
+      "match": "\\\\( |_|&|\\^|\\|)",
+      "name": "constant.character.escape"
+    },
+    "table": {
+      "begin": "^\\.ta[^-]",
+      "beginCaptures": {
+        "0": { "name": "entity.name.function" }
+      },
+      "end": "^\\.ta-",
+      "endCaptures": {
+        "0": { "name": "entity.name.function" }
+      },
+      "name": "meta.ppgen.table",
+      "patterns": [{ "include": "#expression" }]
+    },
+    "macro": {
+      "begin": "^\\.dm",
+      "beginCaptures": {
+        "0": { "name": "entity.name.function" }
+      },
+      "end": "^\\.dm-",
+      "endCaptures": {
+        "0": { "name": "entity.name.function" }
+      },
+      "name": "meta.ppgen.macro",
+      "patterns": [
+        { "include": "#expression" },
+        { "match": "\\$\\d", "name": "variable.language" }
+      ]
+    },
+    "caption-format": {
+      "begin": "^\\.cm",
+      "beginCaptures": {
+        "0": { "name": "entity.name.function" }
+      },
+      "end": "^\\.cm-",
+      "endCaptures": {
+        "0": { "name": "entity.name.function" }
+      },
+      "name": "meta.ppgen.caption-format",
+      "patterns": [
+        { "include": "#expression" },
+        { "match": "\\$\\d", "name": "variable.language" }
+      ]
+    },
+    "footnote-marker": {
+      "match": "\\[[A-Za-z0-9.:_-]+\\]",
+      "name": "string.quoted.single"
+    }
+  }
+}
