@@ -20,7 +20,8 @@
         { "include": "#footnote-marker" },
         { "include": "#table" },
         { "include": "#macro" },
-        { "include": "#caption-format" }
+        { "include": "#caption-format" },
+        { "include": "#page-separators" }
       ]
     },
     "command-generic": {
@@ -122,6 +123,10 @@
     "footnote-marker": {
       "match": "\\[[A-Za-z0-9.:_-]+\\]",
       "name": "string.quoted.single"
+    },
+    "page-separators": {
+      "match": "^-+File: \\d+.png-+",
+      "name": "markup.heading"
     }
   }
 }
